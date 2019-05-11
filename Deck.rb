@@ -1,7 +1,7 @@
 require 'rainbow'
 require 'chroma'
 
-class Shuffle
+class Deck
   attr_reader :deck
 
   SEED = Chroma.paint 'hsl(0, 100%, 50%)'
