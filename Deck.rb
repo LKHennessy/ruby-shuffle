@@ -27,11 +27,11 @@ class Deck
     puts string
   end
 
-  def print_deck
+  def print
     print_horizontal(@deck)
   end
 
-  def split_deck
+  def split
     puts '-----------------Splitting the deck-----------------'
 
     left_half, right_half = deck.each_slice(26).to_a
@@ -42,7 +42,7 @@ class Deck
     @deck = [left_half, right_half]
   end
 
-  def intersperse_deck
+  def intersperse
     puts '-----------------Interspersing the deck-----------------'
 
     @deck = shuffled_deck = @deck.transpose.flatten
@@ -53,10 +53,10 @@ class Deck
   def riffle_shuffle
     puts '-----------------RIFFLE SHUFFLE-----------------'
 
-    print_deck
+    print
 
-    split_deck
+    split
 
-    intersperse_deck
+    intersperse
   end
 end
