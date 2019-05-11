@@ -2,6 +2,8 @@ require 'rainbow'
 require 'chroma'
 
 class Shuffle
+  attr_reader :deck
+
   SEED = Chroma.paint 'hsl(0, 100%, 50%)'
   CARD = ' '
 
@@ -11,7 +13,13 @@ class Shuffle
     end
   end
 
-  def self.print_horizontal(cards)
+  def initialize
+    @deck = SEED.palette.rainbow_52_palette.map(&:to_hex).map do |colour|
+      Rainbow(CARD).background(colour)
+    end
+  end
+
+  def print_horizontal(cards)
     string = ''
     cards.each do |card|
       string = string + card
@@ -19,26 +27,36 @@ class Shuffle
     puts string
   end
 
-  rainbow = SEED.palette.rainbow_52_palette.map(&:to_hex)
-
-  puts '-----------------RIFFLE SHUFFLE-----------------'
-
-  deck = rainbow.map do |colour|
-    Rainbow(CARD).background(colour)
+  def print_deck
+    print_horizontal(@deck)
   end
 
-  self.print_horizontal(deck)
+  def split_deck
+    puts '-----------------Splitting the deck-----------------'
 
-  puts '-----------------Split the deck-----------------'
+    left_half, right_half = deck.each_slice(26).to_a
 
-  left_half, right_half = deck.each_slice(26).to_a
+    print_horizontal(left_half)
+    print_horizontal(right_half)
 
-  self.print_horizontal(left_half)
-  self.print_horizontal(right_half)
+    @deck = [left_half, right_half]
+  end
 
-  puts '-----------------Intersperse-----------------'
+  def intersperse_deck
+    puts '-----------------Interspersing the deck-----------------'
 
-  shuffled_deck = [left_half, right_half].transpose.flatten
+    @deck = shuffled_deck = @deck.transpose.flatten
 
-  self.print_horizontal(shuffled_deck)
+    print_horizontal(shuffled_deck)
+  end
+
+  def riffle_shuffle
+    puts '-----------------RIFFLE SHUFFLE-----------------'
+
+    print_deck
+
+    split_deck
+
+    intersperse_deck
+  end
 end
