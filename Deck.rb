@@ -82,6 +82,18 @@ class Deck
     end
   end
 
+  def complex_overhand_shuffle(times: 1)
+    puts '-----------------COMPLEX OVERHAND SHUFFLE-----------------'
+
+    print
+
+    times.times do
+
+      take_for_overhand(simple: false)
+
+      do_the_shuffle
+    end
+  end
 
   def split_at(card_number: 26)
     puts '-----------------Splitting the deck-----------------'
@@ -127,10 +139,13 @@ class Deck
     print
   end
 
-  def take_for_overhand
+  def take_for_overhand(simple: true)
     puts '-----------------Splitting the deck-----------------'
 
-    left_hand = @deck.slice!(0..4)
+    keep_in_left = rand(0..3)
+    keep_in_right = rand(-4..-1)
+    left_hand = @deck.slice!(0..keep_in_left)
+    left_hand += @deck.slice!(keep_in_right..-1) unless simple
     right_hand = @deck
 
     print_horizontal(left_hand)
