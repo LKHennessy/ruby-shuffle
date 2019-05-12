@@ -48,7 +48,22 @@ class Deck
   def intersperse(pure: true)
     puts '-----------------Interspersing the deck-----------------'
 
-    @deck.shuffle
+    @deck = @deck.shuffle
+
+    unless pure
+      first_half, last_half = @deck
+      if first_half.length > last_half.length
+        difference = first_half.length - last_half.length
+        difference.times do
+          last_half = last_half.insert(rand(0..last_half.length), nil)
+        end
+      else
+        difference = last_half.length - first_half.length
+        difference.times do
+          first_half = first_half.insert(rand(0..first_half.length), nil)
+        end
+      end
+    end
 
     @deck = @deck.first.zip(@deck.last).flatten.compact
 
