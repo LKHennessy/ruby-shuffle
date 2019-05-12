@@ -1,17 +1,12 @@
 require 'rainbow'
 require 'chroma'
+require './palette.rb'
 
 class Deck
   attr_reader :deck
 
   SEED = Chroma.paint 'hsl(0, 100%, 50%)'
   CARD = ' '
-
-  Chroma.define_palette :rainbow_52_palette do
-    51.times do |n|
-      spin((n + 1) * 6.7)
-    end
-  end
 
   def initialize
     @deck = SEED.palette.rainbow_52_palette.map(&:to_hex).map do |colour|
