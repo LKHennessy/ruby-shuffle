@@ -26,6 +26,49 @@ class Deck
     print_horizontal(@deck)
   end
 
+  def ruby_shuffle
+    puts '-----------------RUBY SHUFFLE-----------------'
+
+    print
+
+    puts '-----------------Shuffling-----------------'
+
+    @deck = @deck.shuffle
+
+    print
+  end
+
+  def precise_riffle_shuffle
+    puts '-----------------PRECISE RIFFLE SHUFFLE-----------------'
+
+    print
+
+    split_at
+
+    intersperse
+  end
+
+  def imprecise_riffle_shuffle
+    puts '-----------------IMPRECISE RIFFLE SHUFFLE-----------------'
+
+    print
+
+    split_at(card_number: rand(23..26))
+
+    intersperse(pure: false)
+  end
+
+  def simple_overhand_shuffle
+    puts '-----------------SIMPLE OVERHAND SHUFFLE-----------------'
+
+    print
+
+    take_for_overhand
+
+    do_the_shuffle
+  end
+
+
   def split_at(card_number: 26)
     puts '-----------------Splitting the deck-----------------'
 
@@ -68,48 +111,6 @@ class Deck
     @deck = @deck.first.zip(@deck.last).flatten.compact
 
     print
-  end
-
-  def ruby_shuffle
-    puts '-----------------RUBY SHUFFLE-----------------'
-
-    print
-
-    puts '-----------------Shuffling-----------------'
-
-    @deck = @deck.shuffle
-
-    print
-  end
-
-  def precise_riffle_shuffle
-    puts '-----------------PRECISE RIFFLE SHUFFLE-----------------'
-
-    print
-
-    split_at
-
-    intersperse
-  end
-
-  def imprecise_riffle_shuffle
-    puts '-----------------IMPRECISE RIFFLE SHUFFLE-----------------'
-
-    print
-
-    split_at(card_number: rand(23..26))
-
-    intersperse(pure: false)
-  end
-
-  def simple_overhand_shuffle
-    puts '-----------------SIMPLE OVERHAND SHUFFLE-----------------'
-
-    print
-
-    take_for_overhand
-
-    do_the_shuffle
   end
 
   def take_for_overhand
