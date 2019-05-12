@@ -70,6 +70,18 @@ class Deck
     print
   end
 
+  def ruby_shuffle
+    puts '-----------------RUBY SHUFFLE-----------------'
+
+    print
+
+    puts '-----------------Shuffling-----------------'
+
+    @deck = @deck.shuffle
+
+    print
+  end
+
   def precise_riffle_shuffle
     puts '-----------------PRECISE RIFFLE SHUFFLE-----------------'
 
@@ -81,7 +93,7 @@ class Deck
   end
 
   def imprecise_riffle_shuffle
-    puts '-----------------RIFFLE SHUFFLE-----------------'
+    puts '-----------------IMPRECISE RIFFLE SHUFFLE-----------------'
 
     print
 
