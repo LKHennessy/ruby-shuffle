@@ -31,7 +31,7 @@ class Deck
 
     middle_length = 52 - 2 * card_number
 
-    if rand(0..1) == 0
+    if [true, false].sample
       left_half = @deck.slice!(0..(card_number - 1 + middle_length))
       right_half = @deck
     else
@@ -100,5 +100,42 @@ class Deck
     split_at(card_number: rand(23..26))
 
     intersperse(pure: false)
+  end
+
+  def simple_overhand_shuffle
+    puts '-----------------SIMPLE OVERHAND SHUFFLE-----------------'
+
+    print
+
+    take_for_overhand
+
+    do_the_shuffle
+  end
+
+  def take_for_overhand
+    puts '-----------------Splitting the deck-----------------'
+
+    left_hand = @deck.slice!(0..4)
+    right_hand = @deck
+
+    print_horizontal(left_hand)
+    print_horizontal(right_hand)
+
+    @deck = [left_hand, right_hand]
+  end
+
+  def do_the_shuffle
+    puts '-----------------Do the shuffle-----------------'
+
+    left_hand, right_hand = @deck
+
+    while !right_hand.empty?
+      thing = right_hand.shift(rand(1..5))
+      left_hand = thing + left_hand
+    end
+
+    @deck = left_hand
+
+    print
   end
 end
