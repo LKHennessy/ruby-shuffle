@@ -31,10 +31,18 @@ class Deck
     print_horizontal(@deck)
   end
 
-  def split
+  def split_at(card_number: 26)
     puts '-----------------Splitting the deck-----------------'
 
-    left_half, right_half = deck.each_slice(26).to_a
+    middle_length = 52 - 2 * card_number
+
+    if rand(0..1) == 0
+      left_half = @deck.slice!(0..(card_number - 1 + middle_length))
+      right_half = @deck
+    else
+      left_half = @deck.slice!(0..card_number - 1)
+      right_half = @deck
+    end
 
     print_horizontal(left_half)
     print_horizontal(right_half)
@@ -42,21 +50,33 @@ class Deck
     @deck = [left_half, right_half]
   end
 
-  def intersperse
+  def intersperse(pure: true)
     puts '-----------------Interspersing the deck-----------------'
 
-    @deck = shuffled_deck = @deck.transpose.flatten
+    @deck.shuffle
 
-    print_horizontal(shuffled_deck)
+    @deck = @deck.first.zip(@deck.last).flatten.compact
+
+    print
   end
 
-  def riffle_shuffle
+  def precise_riffle_shuffle
+    puts '-----------------PRECISE RIFFLE SHUFFLE-----------------'
+
+    print
+
+    split_at
+
+    intersperse
+  end
+
+  def imprecise_riffle_shuffle
     puts '-----------------RIFFLE SHUFFLE-----------------'
 
     print
 
-    split
+    split_at(card_number: rand(23..26))
 
-    intersperse
+    intersperse(pure: false)
   end
 end
