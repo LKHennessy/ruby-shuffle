@@ -45,34 +45,41 @@ class Deck
     print
   end
 
-  def precise_riffle_shuffle
+  def precise_riffle_shuffle(times: 1)
     puts '-----------------PRECISE RIFFLE SHUFFLE-----------------'
 
     print
 
-    split_at
+    times.times do
+      split_at
 
-    intersperse
+      intersperse
+    end
   end
 
-  def imprecise_riffle_shuffle
+  def imprecise_riffle_shuffle(times: 1)
     puts '-----------------IMPRECISE RIFFLE SHUFFLE-----------------'
 
     print
 
-    split_at(card_number: rand(23..26))
+    times.times do
+      split_at(card_number: rand(23..26))
 
-    intersperse(pure: false)
+      intersperse(pure: false)
+    end
   end
 
-  def simple_overhand_shuffle
+  def simple_overhand_shuffle(times: 1)
     puts '-----------------SIMPLE OVERHAND SHUFFLE-----------------'
 
     print
 
-    take_for_overhand
+    times.times do
 
-    do_the_shuffle
+      take_for_overhand
+
+      do_the_shuffle
+    end
   end
 
 
