@@ -26,6 +26,13 @@ class Deck
     print_horizontal(@deck)
   end
 
+  def compare_with_new
+    puts '-----------------NEW DECK-----------------'
+    Deck.new.print
+    puts '-----------------CURRENT DECK-----------------'
+    print
+  end
+
   def ruby_shuffle
     puts '-----------------RUBY SHUFFLE-----------------'
 
