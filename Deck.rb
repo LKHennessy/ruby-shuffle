@@ -75,7 +75,6 @@ class Deck
     print
 
     times.times do
-
       take_for_overhand
 
       do_the_shuffle
@@ -88,7 +87,6 @@ class Deck
     print
 
     times.times do
-
       take_for_overhand(simple: false)
 
       do_the_shuffle
