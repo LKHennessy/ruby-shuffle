@@ -89,7 +89,7 @@ class Deck
     times.times do
       take_for_overhand(simple: false)
 
-      do_the_shuffle
+      do_the_shuffle(simple: false)
     end
   end
 
@@ -152,14 +152,19 @@ class Deck
     @deck = [left_hand, right_hand]
   end
 
-  def do_the_shuffle
+  def do_the_shuffle(simple: true)
     puts '-----------------Do the shuffle-----------------'
 
     left_hand, right_hand = @deck
 
-    while !right_hand.empty?
+    until right_hand.empty?
       thing = right_hand.shift(rand(1..5))
       left_hand = thing + left_hand
+      unless simple
+        break if right_hand.empty?
+        thing = right_hand.pop(rand(1..5))
+        left_hand += thing
+      end
     end
 
     @deck = left_hand
