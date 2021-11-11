@@ -5,12 +5,19 @@ require './palette.rb'
 class Deck
   attr_reader :deck
 
-  SEED = Chroma.paint 'hsl(0, 100%, 50%)'
+  RED = Chroma.paint 'hsl(0, 100%, 50%)'
+  BLACK = Chroma.paint 'hsl(0, 0%, 0%)'
   CARD = ' '
 
-  def initialize
-    @deck = SEED.palette.rainbow_52_palette.map(&:to_hex).map do |colour|
-      Rainbow(CARD).background(colour)
+  def initialize(greyscale: false)
+    if greyscale
+      @deck = BLACK.palette.greyscale_52_palette.map(&:to_hex).map do |colour|
+        Rainbow(CARD).background(colour)
+      end
+    else
+      @deck = RED.palette.rainbow_52_palette.map(&:to_hex).map do |colour|
+        Rainbow(CARD).background(colour)
+      end
     end
   end
 
@@ -138,7 +145,7 @@ class Deck
   end
 
   def take_for_overhand(simple: true)
-    puts '-----------------Splitting the deck-----------------'
+    # puts '-----------------Splitting the deck-----------------'
 
     keep_in_left = rand(0..3)
     keep_in_right = rand(-4..-1)
@@ -153,7 +160,7 @@ class Deck
   end
 
   def do_the_shuffle(simple: true)
-    puts '-----------------Do the shuffle-----------------'
+    # puts '-----------------Do the shuffle-----------------'
 
     left_hand, right_hand = @deck
 
@@ -161,10 +168,42 @@ class Deck
       to_transfer = right_hand.shift(rand(1..5))
       to_transfer += right_hand.pop(rand(1..5)) unless simple
       left_hand = to_transfer + left_hand
+      print_horizontal(left_hand)
+      print_horizontal(right_hand)
     end
 
     @deck = left_hand
 
-    print
+    # print
+  end
+
+  def greys
+    [
+      "#ffffff",
+      "#080808",
+      "#121212",
+      "#1c1c1c",
+      "#262626",
+      "#303030",
+      "#3a3a3a",
+      "#444444",
+      "#4e4e4e",
+      "#585858",
+      "#626262",
+      "#6c6c6c",
+      "#767676",
+      "#808080",
+      "#8a8a8a",
+      "#949494",
+      "#9e9e9e",
+      "#a8a8a8",
+      "#b2b2b2",
+      "#bcbcbc",
+      "#c6c6c6",
+      "#d0d0d0",
+      "#dadada",
+      "#e4e4e4",
+      "#eeeeee",
+    ]
   end
 end
